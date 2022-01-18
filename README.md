@@ -23,6 +23,49 @@ A Kotlin implementation of the Swiss Pairing system using an algorithm that find
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
+## Including in your project
+
+Add Jitpack (where the library is hosted) in your root `build.gradle` file:
+
+```groovy
+allprojects {
+  repositories {
+    maven { url "https://jitpack.io" }
+  }
+}
+```
+
+Then in your `build.gradle` module file where you want to use this library:
+
+```groovy
+dependencies {
+  implementation "com.github.PizzaMarinara:MaximumWeightedMatching:{latest_version}"
+}
+
+```
+
+## How to use
+
+```kotlin
+val edges = listOf(GraphEdge(1, 2, 10), GraphEdge(2, 3, 11))
+// The graph defined by this list of GraphEdges has 4 nodes.
+// node 0 has no edges connected to it.
+// node 1 and node 2 are connected by an edge with a weight of 10.
+// node 2 and node 3 are connected by an edge with a weight of 11.
+
+// The rather obvious solution here is just the pair of node 2 and 3.
+// Node 0 has no possible pairs, and node 1's only possible pair is already paired to node 3 with a higher weight.
+
+// Calling maxWeightMatching returns a list of Pairs for each matching pair.
+val matchingPairs: List<Pair<Long, Long>> = MaximumWeightedMatching.maxWeightMatching(edges)
+// This returns [(0, -1), (1, -1), (2, 3)]
+
+// Calling maxWeightMatchingList returns just a list of Long values, where each value is the paired value of its index (or -1 if it is not paired)
+val matchingList: MutableList<Long> = MaximumWeightedMatching.maxWeightMatchingList(edges)
+// This returns (-1, -1, 3, 2)
+
+```
+
 ## Contact
 
 Enrico Fantini<br>
