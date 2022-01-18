@@ -1,18 +1,16 @@
 val junitVersion by extra { "4.13.2" }
 val junitAndroidxVersion by extra { "1.1.3" }
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
+    id("maven-publish")
 }
 
 android {
     defaultConfig {
-        applicationId = "dev.efantini.epicleague"
         compileSdk = 31
         minSdk = 23
         targetSdk = 31
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -45,4 +43,15 @@ dependencies {
     // Tests
     testImplementation("junit:junit:$junitVersion")
     androidTestImplementation("androidx.test.ext:junit:$junitAndroidxVersion")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("MaximumWeightedMatching") {
+            groupId = "dev.efantini"
+            artifactId = "maximumweightedmatching"
+            version = "0.1.0"
+            artifact("$buildDir/outputs/aar/$artifactId-release.aar")
+        }
+    }
 }
