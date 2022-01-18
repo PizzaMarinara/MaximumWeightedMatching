@@ -1,10 +1,7 @@
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<p align="center">
+  <a href="https://github.com/PizzaMarinara/MaximumWeightedMatching/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/PizzaMarinara/MaximumWeightedMatching.svg"/></a>
+  <a href="https://github.com/PizzaMarinara"><img alt="Profile" src="https://img.shields.io/badge/GitHub-PizzaMarinara-orange?logo=github"/></a> 
+</p>
 
 <div id="top"></div>
 <h1 align="center">Maximum Weighted Matching</h1>
@@ -68,8 +65,11 @@ val matchingList: MutableList<Long> = MaximumWeightedMatching.maxWeightMatchingL
 
 ## Contact
 
-Enrico Fantini<br>
-[Twitter](https://twitter.com/Pizza_Marinara) - [Website](https://efantini.dev/)
+**Enrico Fantini**
+<br>
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Twitter][twitter-shield]][twitter-url]
+[![Website][website-shield]][website-url]
 
 Project Link: [https://github.com/PizzaMarinara/MaximumWeightedMatching](https://github.com/PizzaMarinara/MaximumWeightedMatching)
 
@@ -80,17 +80,19 @@ The [python implementation of the swiss algorithm](https://github.com/bakert/swi
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/PizzaMarinara/MaximumWeightedMatching.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/PizzaMarinara/MaximumWeightedMatching.svg
 [contributors-url]: https://github.com/PizzaMarinara/MaximumWeightedMatching/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/PizzaMarinara/MaximumWeightedMatching.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/PizzaMarinara/MaximumWeightedMatching.svg
 [forks-url]: https://github.com/PizzaMarinara/MaximumWeightedMatching/network/members
-[stars-shield]: https://img.shields.io/github/stars/PizzaMarinara/MaximumWeightedMatching.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/PizzaMarinara/MaximumWeightedMatching.svg
 [stars-url]: https://github.com/PizzaMarinara/MaximumWeightedMatching/stargazers
-[issues-shield]: https://img.shields.io/github/issues/PizzaMarinara/MaximumWeightedMatching.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/PizzaMarinara/MaximumWeightedMatching.svg
 [issues-url]: https://github.com/PizzaMarinara/MaximumWeightedMatching/issues
-[license-shield]: https://img.shields.io/github/license/PizzaMarinara/MaximumWeightedMatching.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/PizzaMarinara/MaximumWeightedMatching.svg
 [license-url]: https://github.com/PizzaMarinara/MaximumWeightedMatching/blob/master/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-e--fantini-0072b1.svg?logo=linkedin
 [linkedin-url]: https://linkedin.com/in/e-fantini/
-[twitter-shield]: https://img.shields.io/badge/-Twitter-black.svg?style=for-the-badge&logo=twitter&colorB=555
+[website-shield]: https://img.shields.io/badge/Website-efantini.dev-orange.svg?logo=firefox
+[website-url]: https://efantini.dev/
+[twitter-shield]: https://img.shields.io/badge/Twitter-Pizza__Marinara-1DA1F2.svg?logo=twitter
 [twitter-url]: https://twitter.com/Pizza_Marinara
