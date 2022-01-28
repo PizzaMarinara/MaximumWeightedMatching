@@ -55,21 +55,12 @@ object MaximumWeightedMatching {
         }
 
         val neighbend = mutableListOf<MutableList<Int>>()
+        for (k in 0 until nvertex) {
+            neighbend.add(mutableListOf())
+        }
         edges.forEachIndexed { k, graphEdge ->
-            if (neighbend.size <= graphEdge.node1.toInt()) {
-                for (help in neighbend.size until graphEdge.node1.toInt()) {
-                    neighbend.add(help, mutableListOf())
-                }
-                neighbend.add(graphEdge.node1.toInt(), mutableListOf())
-            }
             neighbend[graphEdge.node1.toInt()].add((2 * k) + 1)
-            if (neighbend.size <= graphEdge.node2.toInt()) {
-                for (help in neighbend.size until graphEdge.node2.toInt()) {
-                    neighbend.add(help, mutableListOf())
-                }
-                neighbend.add(graphEdge.node2.toInt(), mutableListOf())
-            }
-            neighbend[graphEdge.node2.toInt()].add((2 * k))
+            neighbend[graphEdge.node2.toInt()].add(2 * k)
         }
 
         val mate = mutableListOf<Long>()
