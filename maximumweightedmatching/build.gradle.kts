@@ -50,7 +50,7 @@ publishing {
         create<MavenPublication>("MaximumWeightedMatching") {
             groupId = "dev.efantini"
             artifactId = "maximumweightedmatching"
-            version = "0.1.4"
+            version = "0.1.5"
             afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
         }
     }
