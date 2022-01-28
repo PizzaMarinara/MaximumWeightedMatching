@@ -338,7 +338,6 @@ object MaximumWeightedMatching {
             if (debugMode) println("DEBUG: blossomchilds[$b]=${blossomchilds[b]}")
         }
 
-        // Some sketchy
         fun expandBlossom(b: Int, endstage: Boolean) {
             if (debugMode) println(
                 "DEBUG: expandBlossom($b,${if (endstage) 1 else 0})" +
@@ -410,7 +409,7 @@ object MaximumWeightedMatching {
                 labelend[bv] = p
                 bestedge[bv] = -1
                 j += jstep
-                while (
+                expandCycle@ while (
                     if (j < 0) {
                         blossomchilds[b][blossomchilds[b].lastIndex + j + 1]
                     } else {
@@ -427,24 +426,19 @@ object MaximumWeightedMatching {
                         j += jstep
                         continue
                     }
-                    // Sketchy part
-                    /*
-                    for (v in blossomLeaves(bv)) {
-                        if(label[v] != 0)
-                            break
-                    }
-                    if(label[v] != 0) { // Gives error?
-                        assert
-                    }
-                    */
-                    for (v in blossomLeaves(bv)) {
-                        if (label[v] != 0) { // Gives error?
-                            assert(label[v] == 2)
-                            assert(inblossom[v] == bv)
-                            label[v] = 0
-                            label[endpoint[mate[blossombase[bv]].toInt()].toInt()] = 0
-                            assignLabel(v, 2, labelend[v])
-                        }
+
+                    if (debugMode) println("DEBUU: " + blossomLeaves(bv))
+                    val v = blossomLeaves(bv).firstOrNull {
+                        label[it] != 0
+                    } ?: blossomLeaves(bv).last()
+
+                    if (debugMode) println("LABELON = ${label[v]}")
+                    if (label[v] != 0) {
+                        assert(label[v] == 2)
+                        assert(inblossom[v] == bv)
+                        label[v] = 0
+                        label[endpoint[mate[blossombase[bv]].toInt()].toInt()] = 0
+                        assignLabel(v, 2, labelend[v])
                     }
                     j += jstep
                 }
@@ -553,7 +547,7 @@ object MaximumWeightedMatching {
                 while (true) {
                     val bs = inblossom[s]
                     assert(label[bs] == 1)
-                    // assert(labelend[bs] == mate[blossombase[bs]].toInt()) // SKETCHY commented
+                    assert(labelend[bs] == mate[blossombase[bs]].toInt())
                     if (bs >= nvertex) {
                         augmentBlossom(bs, s)
                     }
@@ -709,8 +703,7 @@ object MaximumWeightedMatching {
                     for (b in 0 until (2 * nvertex)) {
                         if (blossomparent[b] == -1 && label[b] == 1 && bestedge[b] != -1) {
                             val kslack = slack(bestedge[b])
-                            // A check about kslack being int or long, to review sketchy
-                            assert((kslack % 2).toInt() == 0)
+                            assert((kslack % 2) == 0.toLong())
                             val d = kslack / 2
                             if (deltatype == -1 || d < delta) {
                                 delta = d.toInt()
@@ -797,7 +790,7 @@ object MaximumWeightedMatching {
             for (v in 0 until nvertex) {
                 assert(mate[v].toInt() == -1 || mate[mate[v].toInt()].toInt() == v)
             }
-
+            if (debugMode) println("DEBUG: MATE = $mate")
             return mate
         }
 
