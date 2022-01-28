@@ -189,7 +189,7 @@ object MaximumWeightedMatching {
         }
 
         fun assignLabel(w: Int, t: Int, p: Int) {
-            if (debugMode) println("assignLabel($w,$t,$p)")
+            if (debugMode) println("DEBUG: assignLabel($w,$t,$p)")
             val b = inblossom[w]
             assert(label[w] == 0 && label[b] == 0)
             label[w] = t
@@ -200,7 +200,7 @@ object MaximumWeightedMatching {
             bestedge[b] = -1
             if (t == 1) {
                 queue.addAll(blossomLeaves(b))
-                if (debugMode) println("PUSH ${blossomLeaves(b)}")
+                if (debugMode) println("DEBUG: PUSH ${blossomLeaves(b)}")
             } else if (t == 2) {
                 val base = blossombase[b]
                 assert(mate[base] >= 0)
@@ -213,7 +213,7 @@ object MaximumWeightedMatching {
         }
 
         fun scanBlossom(parV: Int, parW: Int): Int {
-            if (debugMode) println("scanBlossom($parV,$parW)")
+            if (debugMode) println("DEBUG: scanBlossom($parV,$parW)")
             var v = parV
             var w = parW
             val path = mutableListOf<Int>()
@@ -255,7 +255,7 @@ object MaximumWeightedMatching {
             var bv = inblossom[v]
             var bw = inblossom[w]
             val b = unusedblossoms.removeLast()
-            if (debugMode) println("addBlossom($base,$k) (v=$v w=$w) -> $b")
+            if (debugMode) println("DEBUG: addBlossom($base,$k) (v=$v w=$w) -> $b")
             blossombase[b] = base
             blossomparent[b] = -1
             blossomparent[bb] = b
@@ -344,12 +344,15 @@ object MaximumWeightedMatching {
                     bestedge[b] = it
                 }
             }
-            if (debugMode) println("blossomchilds[$b]=${blossomchilds[b]}")
+            if (debugMode) println("DEBUG: blossomchilds[$b]=${blossomchilds[b]}")
         }
 
         // Some sketchy
         fun expandBlossom(b: Int, endstage: Boolean) {
-            if (debugMode) println("expandBlossom($b,$endstage) ${blossomchilds[b]}")
+            if (debugMode) println(
+                "DEBUG: expandBlossom($b,${if (endstage) 1 else 0})" +
+                    " ${blossomchilds[b]}"
+            )
             blossomchilds[b].forEach { s ->
                 blossomparent[s] = -1
                 if (s < nvertex) {
@@ -466,7 +469,7 @@ object MaximumWeightedMatching {
         }
 
         fun augmentBlossom(b: Int, v: Int) {
-            if (debugMode) println("augmentBlossom($b,$v)")
+            if (debugMode) println("DEBUG: augmentBlossom($b,$v)")
             var t = v
             val jstep: Int
             val endptrick: Int
@@ -522,7 +525,7 @@ object MaximumWeightedMatching {
                     mate[endpoint[p.xor(1)].toInt()] = p.toLong()
                 }
                 if (debugMode) println(
-                    "PAIR " +
+                    "DEBUG: PAIR " +
                         "${if (p < 0) endpoint[endpoint.lastIndex + p + 1] else endpoint[p]}" +
                         " " +
                         "${if (p.xor(1) < 0)
@@ -550,8 +553,8 @@ object MaximumWeightedMatching {
             val edge = edges[k]
             val v = edge.node1.toInt()
             val w = edge.node2.toInt()
-            if (debugMode) println("augmentMatching($k) (v=$v w=$w)")
-            if (debugMode) println("PAIR $v $w (k=$k)")
+            if (debugMode) println("DEBUG: augmentMatching($k) (v=$v w=$w)")
+            if (debugMode) println("DEBUG: PAIR $v $w (k=$k)")
             val listPair = listOf(Pair(v, 2 * k + 1), Pair(w, 2 * k))
             listPair.forEach { (ls, lp) ->
                 var s = ls
@@ -579,7 +582,7 @@ object MaximumWeightedMatching {
                     }
                     mate[j] = labelend[bt].toLong()
                     p = labelend[bt].xor(1)
-                    if (debugMode) println("PAIR $s $t (k=${(p / 2)})")
+                    if (debugMode) println("DEBUG: PAIR $s $t (k=${(p / 2)})")
                 }
             }
         }
@@ -597,7 +600,7 @@ object MaximumWeightedMatching {
         fun mainLoop(): MutableList<Long> {
             for (t in 0 until nvertex) {
 
-                if (debugMode) println("STAGE $t")
+                if (debugMode) println("DEBUG: STAGE $t")
 
                 label.clear()
                 for (i in 0 until nvertex) {
@@ -638,10 +641,10 @@ object MaximumWeightedMatching {
                 var augmented = false
 
                 while (true) {
-                    if (debugMode) println("SUBSTAGE")
+                    if (debugMode) println("DEBUG: SUBSTAGE")
                     while (queue.isNotEmpty() && !augmented) {
                         val v = queue.removeLast()
-                        if (debugMode) println("POP v=$v")
+                        if (debugMode) println("DEBUG: POP v=$v")
                         assert(label[inblossom[v]] == 1)
 
                         run whileCycle@{
@@ -715,7 +718,7 @@ object MaximumWeightedMatching {
                     for (b in 0 until (2 * nvertex)) {
                         if (blossomparent[b] == -1 && label[b] == 1 && bestedge[b] != -1) {
                             val kslack = slack(bestedge[b])
-                            // A check about kslack being int or long, to review
+                            // A check about kslack being int or long, to review sketchy
                             assert((kslack % 2).toInt() == 0)
                             val d = kslack / 2
                             if (deltatype == -1 || d < delta) {
@@ -760,7 +763,7 @@ object MaximumWeightedMatching {
                         }
                     }
 
-                    if (debugMode) println("delta$deltatype=$delta")
+                    if (debugMode) println("DEBUG: delta$deltatype=$delta.000000")
                     if (deltatype == 1) {
                         break
                     } else if (deltatype == 2) {
