@@ -275,7 +275,7 @@ object MaximumWeightedMatching {
                 v = endpoint[labelend[bv]].toInt()
                 bv = inblossom[v]
             }
-            path.add(bv)
+            path.add(bb)
             path.reverse()
             endps.reverse()
             endps.add(2 * k)
@@ -374,7 +374,7 @@ object MaximumWeightedMatching {
                     endptrick = 0
                 } else {
                     jstep = -1
-                    endptrick = 0
+                    endptrick = 1
                 }
                 var p = labelend[b]
                 while (j != 0) {
